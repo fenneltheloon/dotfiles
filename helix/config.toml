@@ -1,0 +1,20 @@
+theme = "catppuccin_mocha"
+
+[editor]
+line-number = "relative"
+bufferline = "multiple"
+color-modes = true
+rulers = [80]
+
+[editor.lsp]
+display-inlay-hints = true
+
+[editor.cursor-shape]
+insert = "bar"
+
+[editor.file-picker]
+hidden = false
+
+[editor.soft-wrap]
+enable = true
+wrap-indicator = ""

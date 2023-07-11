@@ -1,0 +1,7 @@
+import:
+  - ~/.config/alacritty/catppuccin/catppuccin-mocha.yml
+
+font:
+  normal:
+    family: "NotoMono Nerd Font"
+

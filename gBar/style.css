@@ -1,0 +1,396 @@
+* {
+  all: unset;
+  font-family: "NotoMono Nerd Font";
+}
+
+.popup {
+  color: #313244;
+}
+
+.bar, tooltip {
+  background-color: #1e1e2e;
+  border-radius: 16px;
+}
+
+.right {
+  margin-right: 10px;
+  border-radius: 16px;
+}
+
+.time-text {
+  font-size: 16px;
+}
+
+.reboot-button {
+  font-size: 28px;
+  margin-right: 6px;
+  color: #89b4fa;
+}
+
+.sleep-button {
+  font-size: 28px;
+  color: #89b4fa;
+}
+
+.exit-button {
+  font-size: 28px;
+  color: #89b4fa;
+}
+
+.power-button {
+  font-size: 28px;
+  color: #f38ba8;
+}
+
+.power-box-expand {
+  margin-right: 6px;
+}
+
+.system-confirm {
+  color: #a6e3a1;
+}
+
+trough {
+  border-radius: 3px;
+  border-width: 1px;
+  border-style: none;
+  background-color: #45475a;
+  margin-top: 2px;
+  min-width: 4px;
+  min-height: 4px;
+}
+
+slider {
+  border-radius: 0%;
+  border-width: 1px;
+  border-style: none;
+  margin: -9px -9px -9px -9px;
+  min-width: 16px;
+  min-height: 16px;
+  background-color: transparent;
+}
+
+highlight {
+  border-radius: 3px;
+  border-width: 1px;
+  border-style: none;
+  min-height: 6px;
+}
+
+.audio-icon {
+  font-size: 24px;
+  color: #fab387;
+  margin-right: 12px;
+}
+
+.audio-volume trough {
+  background-color: #45475a;
+}
+.audio-volume slider {
+  background-color: transparent;
+}
+.audio-volume highlight {
+  background-color: #fab387;
+}
+
+.mic-icon {
+  font-size: 24px;
+  color: #b4befe;
+  margin-right: 0px;
+}
+
+.mic-volume trough {
+  background-color: #45475a;
+}
+.mic-volume slider {
+  background-color: transparent;
+}
+.mic-volume highlight {
+  background-color: #b4befe;
+}
+
+.package-outofdate {
+  font-size: 24px;
+  margin-right: -5px;
+  margin-left: -5px;
+  color: #f38ba8;
+}
+
+.bt-num {
+  font-size: 16px;
+  color: #74c7ec;
+  margin-left: -6px;
+}
+
+.bt-label-on {
+  font-size: 20px;
+  color: #74c7ec;
+  margin-right: 6px;
+}
+
+.bt-label-off {
+  font-size: 24px;
+  color: #74c7ec;
+  margin-right: 6px;
+}
+
+.bt-label-connected {
+  font-size: 28px;
+  color: #74c7ec;
+  margin-right: 6px;
+}
+
+.disk-util-progress {
+  color: #b4befe;
+  background-color: #45475a;
+  font-size: 16px;
+}
+
+.disk-data-text {
+  color: #b4befe;
+  margin-right: 6px;
+  font-size: 16px;
+}
+
+.vram-util-progress {
+  color: #fab387;
+  background-color: #45475a;
+}
+
+.vram-data-text {
+  color: #fab387;
+  margin-right: 6px;
+  font-size: 16px;
+}
+
+.ram-util-progress {
+  color: #f9e2af;
+  background-color: #45475a;
+}
+
+.ram-data-text {
+  color: #f9e2af;
+  margin-right: 6px;
+  font-size: 16px;
+}
+
+.gpu-util-progress {
+  color: #94e2d5;
+  background-color: #45475a;
+}
+
+.gpu-data-text {
+  color: #94e2d5;
+  margin-right: 6px;
+  font-size: 16px;
+}
+
+.cpu-util-progress {
+  color: #a6e3a1;
+  background-color: #45475a;
+  font-size: 16px;
+}
+
+.cpu-data-text {
+  color: #a6e3a1;
+  margin-right: 6px;
+  font-size: 16px;
+}
+
+.battery-util-progress {
+  color: #f5c2e7;
+  background-color: #45475a;
+  font-size: 16px;
+}
+
+.battery-data-text {
+  color: #f5c2e7;
+  margin-right: 6px;
+  font-size: 16px;
+}
+
+.network-data-text {
+  color: #a6e3a1;
+  margin-right: 6px;
+  font-size: 16px;
+}
+
+.network-up-under {
+  color: #45475a;
+}
+
+.network-up-low {
+  color: #a6e3a1;
+}
+
+.network-up-mid-low {
+  color: #f9e2af;
+}
+
+.network-up-mid-high {
+  color: #fab387;
+}
+
+.network-up-high {
+  color: #b4befe;
+}
+
+.network-up-over {
+  color: #f38ba8;
+}
+
+.network-down-under {
+  color: #45475a;
+}
+
+.network-down-low {
+  color: #a6e3a1;
+}
+
+.network-down-mid-low {
+  color: #f9e2af;
+}
+
+.network-down-mid-high {
+  color: #fab387;
+}
+
+.network-down-high {
+  color: #b4befe;
+}
+
+.network-down-over {
+  color: #f38ba8;
+}
+
+.ws-dead {
+  color: #45475a;
+  font-size: 16px;
+}
+
+.ws-inactive {
+  color: #89b4fa;
+  font-size: 16px;
+}
+
+.ws-visible {
+  color: #94e2d5;
+  font-size: 16px;
+}
+
+.ws-current {
+  color: #f9e2af;
+  font-size: 16px;
+}
+
+.ws-active {
+  color: #a6e3a1;
+  font-size: 16px;
+}
+
+@keyframes connectanim {
+  from {
+    background-image: radial-gradient(circle farthest-side at center, #74c7ec 0%, transparent 0%, transparent 100%);
+  }
+  to {
+    background-image: radial-gradient(circle farthest-side at center, #74c7ec 0%, #74c7ec 100%, transparent 100%);
+  }
+}
+@keyframes disconnectanim {
+  from {
+    background-image: radial-gradient(circle farthest-side at center, transparent 0%, #74c7ec 0%, #74c7ec 100%);
+  }
+  to {
+    background-image: radial-gradient(circle farthest-side at center, transparent 0%, transparent 100%, #74c7ec 100%);
+  }
+}
+@keyframes scanonanim {
+  from {
+    color: #f9e2af;
+  }
+  to {
+    color: #a6e3a1;
+  }
+}
+@keyframes scanoffanim {
+  from {
+    color: #a6e3a1;
+  }
+  to {
+    color: #f9e2af;
+  }
+}
+.bt-bg {
+  background-color: #1e1e2e;
+  border-radius: 16px;
+}
+
+.bt-header-box {
+  margin-top: 4px;
+  margin-right: 8px;
+  margin-left: 8px;
+  font-size: 24px;
+  color: #74c7ec;
+}
+
+.bt-body-box {
+  margin-right: 8px;
+  margin-left: 8px;
+}
+
+.bt-button {
+  border-radius: 16px;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  margin-bottom: 4px;
+  margin-top: 4px;
+  font-size: 16px;
+}
+.bt-button.active {
+  animation-name: connectanim;
+  animation-duration: 50ms;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+.bt-button.inactive {
+  animation-name: disconnectanim;
+  animation-duration: 50ms;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+.bt-button.failed {
+  color: #f38ba8;
+}
+
+.bt-close {
+  color: #f38ba8;
+  background-color: #45475a;
+  border-radius: 16px;
+  padding: 0px 8px 0px 7px;
+  margin: 0px 0px 0px 8px;
+}
+
+.bt-scan {
+  color: #f9e2af;
+  background-color: #45475a;
+  border-radius: 16px;
+  padding: 2px 11px 0px 7px;
+  margin: 0px 0px 0px 10px;
+  font-size: 18px;
+}
+.bt-scan.active {
+  animation-name: scanonanim;
+  animation-duration: 50ms;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+.bt-scan.inactive {
+  animation-name: scanoffanim;
+  animation-duration: 50ms;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+/*# sourceMappingURL=style.css.map */
