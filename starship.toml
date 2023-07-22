@@ -8,58 +8,92 @@ format = """
 $os\
 $username\
 [](fg:sapphire bg:overlay1)\
+$hostname\
 $directory\
 [](fg:overlay1 bg:surface0)\
+$container\
+$env_var\
 $git_branch\
 $git_status\
-[](fg:surface0 bg:mauve)\
+$hg_branch\
+$pijul_channel\
+$vcsh\
+[](fg:surface0 bg:crust)\
+$crystal\
+$deno\
+[](fg:crust bg:rosewater)\
+$bun\
+$fennel\
+[](fg:rosewater bg:flamingo)\
+[](fg:flamingo bg:pink)\
+$raku\
+[](fg:pink bg:mauve)\
 $dotnet\
 $kotlin\
 [](fg:mauve bg:red)\
 $cmake\
+$erlang\
 $java\
+$openstack\
+$red\
 $ruby\
 $scala\
-$openstack\
 [](fg:red bg:maroon)\
 $package\
 [](fg:maroon bg:peach)\
+$haxe\
 $ocaml\
 $rust\
 $swift\
 [](fg:peach bg:yellow)\
+$aws\
 $nim\
+$guix_shell\
 $python\
 $zig\
-$aws\
 [](fg:yellow bg:green)\
+$conda\
 $julia\
-$nodejs\
 $memory_usage\
+$nodejs\
 [](fg:green bg:teal)\
 $gradle\
+$purescript\
 [](fg:teal bg:sky)\
+$azure\
+$buf\
+$dart\
+$docker_context\
+$elm\
 $golang\
 $perl\
-$docker_context\
-$azure\
+$spack\
 [](fg:sky bg:blue)\
 $c\
-$lua\
-$rlang\
-$vlang\
+$cobol\
+$daml\
 $gcloud\
+$helm\
+$kubernetes\
+$lua\
 $nix_shell\
+$opa\
+$rlang\
+$singularity\
+$vagrant\
+$vlang\
 [](fg:blue bg:lavender)\
+$elixir\
 $haskell\
-$php\
 $meson\
-[](fg:lavender bg:overlay2)\
-$env_var\
+$php\
+$solidity\
+$terraform\
+[](fg:lavender bg:subtext1)\
 $custom\
-$sudo\
+$jobs\
 $cmd_duration\
-[ ](fg:overlay2)\
+[ ](fg:subtext1)\
 $line_break\
 $character\
 """
@@ -67,20 +101,71 @@ $character\
 # Inserts a blank line between shell prompts
 add_newline = true
 
-# You can also replace your username with a neat symbol like   or disable this
-# and use the os module below
-[username]
-show_always = true
-style_user = "bg:#9A348E"
-style_root = "bg:#9A348E"
-format = '[$user ]($style)'
-disabled = true
+[aws]
+symbol = " "
+format = '[$symbol($profile )(\($region\) )(\[$duration\] )]($style)'
+style = "bg:peach fg:mantle"
 
-# An alternative to the username module which displays a symbol that
-# represents the current operating system
-[os]
-style = "bg:sapphire fg:mantle"
-disabled = false # Disabled by default
+[azure]
+symbol = " "
+format = '[ $symbol($subscription) ]($style) '
+style = "bg:sky fg:mantle"
+
+[buf]
+format = '[ $symbol($version) ]($style)'
+style = "bg:sky fg:mantle"
+
+[bun]
+format = '[ $symbol($version) ]($style)'
+style = "bg:rosewater fg:mantle"
+
+[c]
+format = '[ $symbol($version(-$name)) ]($style)'
+symbol = " "
+style = "bg:blue fg:mantle"
+
+[character]
+success_symbol = '[ 󱜙 ](fg:mantle bg:green)[ ](green)'
+error_symbol = '[ 󱚝 ](fg:mantle bg:red)[ ](red)'
+format = "$symbol"
+
+[cmake]
+format = '[ $symbol($version) ]($style)'
+style = "bg:red fg:mantle"
+
+[cobol]
+format = '[ $symbol($version) ]($style)'
+style = "bg:blue fg:mantle"
+
+[cmd_duration]
+format = '[ $duration ]($style)'
+style = "bg:subtext1 fg:mantle bold"
+
+[conda]
+format = '[ $symbol$environment ]($style)'
+style = "bg:green fg:mantle"
+
+[container]
+format = '[ $symbol \[$name\] ]($style)'
+style = "bg:surface0 fg:text"
+
+[crystal]
+format = '[ $symbol($version) ]($style)'
+symbol = " "
+style = "bg:crust fg:text"
+
+[daml]
+format = '[ $symbol($version) ]($style)'
+style = "bg:blue fg:mantle"
+
+[dart]
+format = '[ $symbol($version) ]($style)'
+symbol = " "
+style = "bg:sky fg:mantle"
+
+[deno]
+format = '[ $symbol($version) ]($style)'
+style = "bg:crust fg:text"
 
 [directory]
 style = "bg:overlay1 fg:mantle"
@@ -103,30 +188,45 @@ read_only = " 󰌾"
 # So either put "Important Documents" before "Documents" or use the substituted version:
 # "Important 󰈙 " = " 󰈙 "
 
-# Replace the '❯' symbol in the prompt with '➜'
-[character]
-success_symbol = '[ 󱜙 ](fg:mantle bg:green)[ ](green)'
-error_symbol = '[ 󱚝 ](fg:mantle bg:red)[ ](red)'
-format = "$symbol"
-
-[aws]
-symbol = "  "
-style = "bg:peach fg:mantle"
-
-[c]
-symbol = " "
-style = "bg:blue fg:mantle"
-
-[cmd_duration]
-format = '[ $duration ]($style)'
-style = "bg:overlay2 fg:mantle bold"
-
 [docker_context]
+format = '[ $symbol$context ]($style)'
 symbol = " "
 style = "bg:sky fg:mantle"
 
+[dotnet]
+symbol = "󰪮 "
+format = '[ $symbol($version )(󰓾 $tfm) ]($style)'
+style = "bg:mauve fg:mantle"
+
+[elixir]
+symbol = " "
+format = '[ $symbol($version \(OTP $otp_version\)) ]($style)'
+style = "bg:lavender fg:mantle"
+
+[elm]
+symbol = " "
+format = '[ $symbol($version) ]($style)'
+style = "bg:sky fg:mantle"
+
+[env_var]
+format = "[ $env_value ]($style)"
+style = "bg:surface0 fg:text"
+
+[erlang]
+format = '[ $symbol($version) ]($style)'
+symbol = " "
+style = "bg:red fg:mantle"
+
+[fennel]
+format = '[ $symbol($version) ]($style)'
+style = "bg:rosewater fg:mantle"
+
+[gcloud]
+format = '[ $symbol$account(@$domain)(\($region\)) ]($style)'
+style = "bg:blue fg:mantle"
+
 [git_branch]
-symbol = ""
+symbol = " "
 format = "[ $symbol $branch(:$remote_branch ) ]($style)"
 style = "bg:surface0 fg:text bold"
 
@@ -135,44 +235,117 @@ style = "bg:surface0 fg:text"
 format = '([\[$all_status$ahead_behind\] ]($style))'
 
 [golang]
-symbol = " "
+symbol = "󰟓 "
+format = '[ $symbol($version) ]($style)'
 style = "bg:sky fg:mantle"
+
+[guix_shell]
+symbol = " "
+format = '[ $symbol ]($style)'
+style = "bg:yellow fg:mantle"
+
+[gradle]
+symbol = " "
+format = "[ $symbol($version) ]($style)"
+style = "bg:teal fg:mantle"
 
 [haskell]
 symbol = " "
+format = '[ $symbol($version) ]($style)'
 style = "bg:lavender fg:mantle"
+
+[haxe]
+symbol = " "
+format = "[ $symbol($version) ]($style)"
+style = "bg:peach fg:mantle"
+
+[helm]
+symbol = "󰠳 "
+format = '[ $symbol($version) ]($style)'
+style = "bg:blue fg:mantle"
+
+[hostname]
+format = '[ $symbol($version) ]($style)'
+style = "bg:overlay1 fg:mantle"
 
 [java]
 symbol = " "
+format = '[ ${symbol}(${version}) ]($style)'
 style = "bg:red fg:mantle"
+
+[jobs]
+format = '[ $symbol$number ]($style)'
+symbol = " "
+style = "bg:subtext1 fg:mantle"
 
 [julia]
 symbol = " "
 style = "bg:green fg:mantle"
+format = '[ $symbol($version) ]($style)'
+
+[kotlin]
+symbol = " "
+format = '[ $symbol($version) ]($style)'
+style = "bg:mauve fg:mantle"
+
+[kubernetes]
+symbol = "󱃾 "
+format = '[ $symbol$context( \($namespace\)) ]($style)'
+style = "bg:blue fg:mantle"
 
 [lua]
 symbol = " "
 style = "bg:blue fg:mantle"
+format = '[ $symbol($version) ]($style)'
 
 [memory_usage]
 symbol = "󰍛 "
 style = "bg:green fg:mantle"
+format = '$symbol [ ${ram}( \| ${swap}) ]($style)'
 
 [meson]
 symbol = "󰔷 "
 style = "bg:lavender fg:mantle"
+format = '[ $symbol$project ]($style)'
+
+[hg_branch]
+format = '[ $symbol$branch(:$topic) ]($style)'
+symbol = " "
+style = "bg:surface0 fg:text bold"
 
 [nim]
-symbol = "󰆥 "
+symbol = " "
+format = "[ $symbol($version) ]($style)"
 style = "bg:yellow fg:mantle"
 
 [nix_shell]
 symbol = " "
 style = "bg:blue fg:mantle"
+format = '[ $symbol$state( \($name\)) ]($style)'
 
 [nodejs]
 symbol = " "
 style = "bg:green fg:mantle"
+format = '[ $symbol($version) ]($style)'
+
+[ocaml]
+symbol = " "
+style = "bg:peach fg:mantle"
+format = '[ $symbol($version )(\($switch_indicator$switch_name\)) ]($style)'
+
+[opa]
+format = '[ $symbol($version) ]($style)'
+style = "bg:blue fg:mantle"
+
+[openstack]
+format = '[ $symbol$cloud(\($project\)) ]($style)'
+style = "bg:red fg:mantle"
+
+# An alternative to the username module which displays a symbol that
+# represents the current operating system
+[os]
+style = "bg:sapphire fg:mantle"
+disabled = false # Disabled by default
 
 [os.symbols]
 Alpaquita = " "
@@ -217,31 +390,104 @@ Windows = "󰍲 "
 
 [package]
 symbol = "󰏗 "
+format = '[ $symbol$version ]($style)'
 style = "bg:maroon fg:mantle"
+
+[perl]
+format = '[ $symbol($version) ]($style)'
+symbol = " "
+style = "bg:sky fg:mantle"
+
+[php]
+style = "bg:blue fg:mantle"
+format = '[ $symbol($version) ]($style)'
+symbol = " "
+
+[pijul_channel]
+symbol = " "
+format = '[ $symbol$channel ]($style)'
+style = "bg:surface0 fg:text bold"
+
+[purescript]
+format = '[ $symbol($version) ]($style)'
+symbol = " "
+style = "bg:teal fg:mantle"
 
 [python]
 symbol = " "
 style = "bg:yellow fg:mantle"
+format = '[ ${symbol}${pyenv_prefix}(${version} )(\($virtualenv\)) ]($style)'
 
 [rlang]
 symbol = "󰟔 "
+format = '[ $symbol($version) ]($style)'
 style = "bg:blue fg:mantle"
+
+[raku]
+format = '[ $symbol($version-$vm_version) ]($style)'
+style = "bg:pink fg:mantle"
+
+[red]
+format = '[ $symbol($version) ]($style)'
+style = "bg:red fg:mantle"
 
 [ruby]
 symbol = " "
 style = "bg:red fg:mantle"
+format = '[ $symbol($version) ]($style)'
 
 [rust]
 symbol = " "
 style = "bg:peach fg:mantle"
+format = '[ $symbol($version) ]($style)'
 
 [scala]
 symbol = " "
+format = '[ ${symbol}(${version}) ]($style)'
 style = "bg:red fg:mantle"
 
-[status]
-format = "[ $status($style) ]"
-style = "fg:mantle bg:red"
+[singularity]
+format = '[ $symbol\[$env\] ]($style)'
+style = "bg:blue fg:mantle"
+
+[solidity]
+style = "bg:lavender fg:mantle"
+format = "[ $symbol($version) ]($style)"
+
+[spack]
+style = "bg:sky fg:mantle"
+format = '[ $symbol$environment ]($style)'
+
+[swift]
+style = "bg:peach fg:mantle"
+format = '[ $symbol($version) ]($style)'
+symbol = " "
+
+[terraform]
+style = "bg:lavender fg:mantle"
+format = '[ $symbol$workspace ]($style)'
+symbol = "󱁢 "
+
+[username]
+disabled = true
+
+[vagrant]
+style = "bg:blue fg:mantle"
+format = '[ $symbol($version) ]($style)'
+
+[vlang]
+format = '[ $symbol($version) ]($style)'
+style = "bg:blue fg:mantle"
+symbol = " "
+
+[vcsh]
+format = ' vcsh[ $repo ]($style)'
+style = "bg:surface0 fg:text bold"
+
+[zig]
+format = '[ $symbol($version) ]($style)'
+symbol = " "
+style = "bg:yellow fg:mantle" 
 
 [palettes.catppuccin_mocha]
 rosewater = "#f5e0dc"
