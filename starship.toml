@@ -1,77 +1,178 @@
+palette = "catppuccin_mocha"
+
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """
+[ ](bg:sapphire)\
+$os\
+$username\
+[](fg:sapphire bg:overlay1)\
+$directory\
+[](fg:overlay1 bg:surface0)\
+$git_branch\
+$git_status\
+[](fg:surface0 bg:mauve)\
+$dotnet\
+$kotlin\
+[](fg:mauve bg:red)\
+$cmake\
+$java\
+$ruby\
+$scala\
+$openstack\
+[](fg:red bg:maroon)\
+$package\
+[](fg:maroon bg:peach)\
+$ocaml\
+$rust\
+$swift\
+[](fg:peach bg:yellow)\
+$nim\
+$python\
+$zig\
+$aws\
+[](fg:yellow bg:green)\
+$julia\
+$nodejs\
+$memory_usage\
+[](fg:green bg:teal)\
+$gradle\
+[](fg:teal bg:sky)\
+$golang\
+$perl\
+$docker_context\
+$azure\
+[](fg:sky bg:blue)\
+$c\
+$lua\
+$rlang\
+$vlang\
+$gcloud\
+$nix_shell\
+[](fg:blue bg:lavender)\
+$haskell\
+$php\
+$meson\
+[](fg:lavender bg:overlay2)\
+$env_var\
+$custom\
+$sudo\
+$cmd_duration\
+[ ](fg:overlay2)\
+$line_break\
+$character\
+"""
+
+# Inserts a blank line between shell prompts
+add_newline = true
+
+# You can also replace your username with a neat symbol like   or disable this
+# and use the os module below
+[username]
+show_always = true
+style_user = "bg:#9A348E"
+style_root = "bg:#9A348E"
+format = '[$user ]($style)'
+disabled = true
+
+# An alternative to the username module which displays a symbol that
+# represents the current operating system
+[os]
+style = "bg:sapphire fg:mantle"
+disabled = false # Disabled by default
+
+[directory]
+style = "bg:overlay1 fg:mantle"
+format = "[ $path ]($style)"
+truncation_length = 1
+truncation_symbol = ""
+read_only = " 󰌾"
+
+# Here is how you can shorten some long paths by text replacement
+# similar to mapped_locations in Oh My Posh:
+[directory.substitutions]
+"Documents" = "󰈙 "
+"Downloads" = " "
+"Music" = " "
+"Pictures" = " "
+"~" = ""
+# Keep in mind that the order matters. For example:
+# "Important Documents" = " 󰈙 "
+# will not be replaced, because "Documents" was already substituted before.
+# So either put "Important Documents" before "Documents" or use the substituted version:
+# "Important 󰈙 " = " 󰈙 "
+
+# Replace the '❯' symbol in the prompt with '➜'
+[character]
+success_symbol = '[ 󱜙 ](fg:mantle bg:green)[ ](green)'
+error_symbol = '[ 󱚝 ](fg:mantle bg:red)[ ](red)'
+format = "$symbol"
+
 [aws]
 symbol = "  "
-
-[buf]
-symbol = " "
+style = "bg:peach fg:mantle"
 
 [c]
 symbol = " "
+style = "bg:blue fg:mantle"
 
-[conda]
-symbol = " "
-
-[dart]
-symbol = " "
-
-[directory]
-read_only = " 󰌾"
+[cmd_duration]
+format = '[ $duration ]($style)'
+style = "bg:overlay2 fg:mantle bold"
 
 [docker_context]
 symbol = " "
-
-[elixir]
-symbol = " "
-
-[elm]
-symbol = " "
-
-[fossil_branch]
-symbol = " "
+style = "bg:sky fg:mantle"
 
 [git_branch]
-symbol = " "
+symbol = ""
+format = "[ $symbol $branch(:$remote_branch )]($style)"
+style = "bg:surface0 fg:text bold"
+
+[git_status]
+style = "bg:surface0 fg:text"
+format = '([ \[$all_status$ahead_behind\] ]($style))'
 
 [golang]
 symbol = " "
-
-[guix_shell]
-symbol = " "
+style = "bg:sky fg:mantle"
 
 [haskell]
 symbol = " "
-
-[haxe]
-symbol = "⌘ "
-
-[hg_branch]
-symbol = " "
-
-[hostname]
-ssh_symbol = " "
+style = "bg:lavender fg:mantle"
 
 [java]
 symbol = " "
+style = "bg:red fg:mantle"
 
 [julia]
 symbol = " "
+style = "bg:green fg:mantle"
 
 [lua]
 symbol = " "
+style = "bg:blue fg:mantle"
 
 [memory_usage]
 symbol = "󰍛 "
+style = "bg:green fg:mantle"
 
 [meson]
 symbol = "󰔷 "
+style = "bg:lavender fg:mantle"
 
 [nim]
 symbol = "󰆥 "
+style = "bg:yellow fg:mantle"
 
 [nix_shell]
 symbol = " "
+style = "bg:blue fg:mantle"
 
 [nodejs]
 symbol = " "
+style = "bg:green fg:mantle"
 
 [os.symbols]
 Alpaquita = " "
@@ -116,27 +217,31 @@ Windows = "󰍲 "
 
 [package]
 symbol = "󰏗 "
-
-[pijul_channel]
-symbol = "🪺 "
+style = "bg:maroon fg:mantle"
 
 [python]
 symbol = " "
+style = "bg:yellow fg:mantle"
 
 [rlang]
 symbol = "󰟔 "
+style = "bg:blue fg:mantle"
 
 [ruby]
 symbol = " "
+style = "bg:red fg:mantle"
 
 [rust]
 symbol = " "
+style = "bg:peach fg:mantle"
 
 [scala]
 symbol = " "
+style = "bg:red fg:mantle"
 
-[spack]
-symbol = "🅢 "
+[status]
+format = "[ $status($style) ]"
+style = "fg:mantle bg:red"
 
 [palettes.catppuccin_mocha]
 rosewater = "#f5e0dc"
@@ -165,5 +270,3 @@ surface0 = "#313244"
 base = "#1e1e2e"
 mantle = "#181825"
 crust = "#11111b"
-
-palette = "catppuccin_mocha"

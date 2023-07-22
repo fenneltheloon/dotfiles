@@ -12,3 +12,7 @@ unity3d/
 yuzu/
 baloofileinformationrc
 mimeapps.list
+libfm/
+nvim/lazy-lock.json
+pcmanfm/
+pulse/
