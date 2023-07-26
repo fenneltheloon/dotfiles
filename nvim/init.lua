@@ -44,31 +44,24 @@ local plugins = {
     "neovim/nvim-lspconfig",
     "nvim-treesitter/nvim-treesitter",
     {
-        "hrsh7th/nvim-cmp",
+        'VonHeikemen/lsp-zero.nvim',
+        branch = 'v2.x',
         dependencies = {
-            "hrsh7th/cmp-nvim-lsp",
-            "hrsh7th/cmp-nvim-lua",
-            "hrsh7th/cmp-buffer",
-            "hrsh7th/cmp-path",
-            "hrsh7th/cmp-cmdline",
-            "saadparwaiz1/cmp_luasnip",
-            "L3MON4D3/LuaSnip",
-            "rafamadriz/friendly-snippets",
-            "petertriho/cmp-git"
-        }
+                -- LSP Support
+                {'neovim/nvim-lspconfig'},             -- Required
+                {                                      -- Optional
+                    'williamboman/mason.nvim',
+                    build = function()
+                        pcall(vim.api.nvim_command, 'MasonUpdate')
+                    end,
+                },
+            {'williamboman/mason-lspconfig.nvim'}, -- Optional
 
-    },
-    {
-        'junnplus/lsp-setup.nvim',
-        dependencies = {
-            'neovim/nvim-lspconfig',
-            {
-                "williamboman/mason.nvim",
-                -- :MasonUpdate updates registry contents
-                build = ":MasonUpdate"
-            },
-            'williamboman/mason-lspconfig.nvim', -- optional
-        },
+            -- Autocompletion
+            {'hrsh7th/nvim-cmp'},     -- Required
+            {'hrsh7th/cmp-nvim-lsp'}, -- Required
+            {'L3MON4D3/LuaSnip'},     -- Required
+        }
     },
     "m4xshen/autoclose.nvim",
     "nvim-lualine/lualine.nvim",
@@ -129,89 +122,19 @@ require("oil").setup()
 vim.keymap.set("n", "-", require("oil").open,
 { desc = "Open parent directory" })
 
--- Set up nvim-cmp. -----------------------------------------------------------
-local cmp = require'cmp'
+-- Set up lsp-zero. -----------------------------------------------------------
+local lsp = require('lsp-zero').preset({})
 
-cmp.setup({
-    snippet = {
-        expand = function(args)
-            require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-        end,
-    },
-    window = {
-        completion = cmp.config.window.bordered(),
-        documentation = cmp.config.window.bordered(),
-    },
-    mapping = cmp.mapping.preset.insert({
-        ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ['<C-Space>'] = cmp.mapping.complete(),
-        ['<C-e>'] = cmp.mapping.abort(),
-        -- Accept currently selected item. Set `select` to `false` to only
-        -- confirm explicitly selected items.
-        ['<CR>'] = cmp.mapping.confirm({ select = false }),
-    }),
-    sources = cmp.config.sources({
-        { name = 'nvim_lsp' },
-        -- { name = 'vsnip' }, -- For vsnip users.
-        { name = 'luasnip' }, -- For luasnip users.
-        -- { name = 'ultisnips' }, -- For ultisnips users.
-        -- { name = 'snippy' }, -- For snippy users.
-    }, {
-        { name = 'buffer' },
-    })
-})
+lsp.on_attach(function(client, bufnr)
+  -- see :help lsp-zero-keybindings
+  -- to learn the available actions
+  lsp.default_keymaps({buffer = bufnr})
+end)
 
--- Set configuration for specific filetype.
-cmp.setup.filetype('gitcommit', {
-    sources = cmp.config.sources({
-        -- You can specify the `git` source if [you were installed it]
-        -- (https://github.com/petertriho/cmp-git).
-        { name = 'git' },
-    },
-    {
-        { name = 'buffer' },
-    })
-})
+-- (Optional) Configure lua language server for neovim
+require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
 
--- Use buffer source for `/` and `?` (if you enabled `native_menu`,
--- this won't work anymore).
-cmp.setup.cmdline({ '/', '?' }, {
-    mapping = cmp.mapping.preset.cmdline(),
-    sources = {
-        { name = 'buffer' }
-    }
-})
-
--- Use cmdline & path source for ':' (if you enabled `native_menu`,
--- this won't work anymore).
-cmp.setup.cmdline(':', {
-    mapping = cmp.mapping.preset.cmdline(),
-    sources = cmp.config.sources({
-        { name = 'path' }
-    }, {
-        { name = 'cmdline' }
-    })
-})
-
--- Set up lspconfig.
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
-require('lspconfig')['lua_ls'].setup {
-    capabilities = capabilities
-}
-require('lspconfig')['yamlls'].setup {
-    capabilities = capabilities
-}
-require('lspconfig')['pylsp'].setup {
-    capabilities = capabilities
-}
-require('lspconfig')['ltex'].setup {
-    capabilities = capabilities
-}
-require('lspconfig')['marksman'].setup {
-    capabilities = capabilities
-}
-
+lsp.setup()
 -------------------------------------------------------------------------------
 
 -- The all important colorscheme

@@ -15,7 +15,7 @@ alias la='ls -a'
 alias lla='ls -la'
 alias lt='ls --tree'
 alias tree='lt'
-alias grep='ripgrep'
+alias grep='rg'
 alias cat="bat"
 alias g="lazygit"
 alias nv="nvim"
@@ -32,3 +32,6 @@ export MANROFFOPT="-c"
 eval "$(starship init bash)"
 eval "$(zoxide init bash)"
 echo -e "${BOLD_BLUE}${SPLASH}${NC}\n"
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
