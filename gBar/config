@@ -53,7 +53,7 @@ CenterTime: true
 TimeSpace: 300
 
 # Set datetime style
-DateTimeStyle: %a %D - %H:%M %Z
+DateTimeStyle: %a %D - %H:%M
 
 # Adds a audio input(aka. microphone) widget
 AudioInput: true
