@@ -1,7 +1,9 @@
 lastupdatecheck: 0
 recentrepos:
-    - /home/captainbanaynays/.config
-    - /home/captainbanaynays/Documents/lattice-optimization
+- /home/captainbanaynays/.config
+- /home/captainbanaynays/Documents/dice-roller
+- /home/captainbanaynays/Documents/lattice-optimization
 startuppopupversion: 5
 customcommandshistory: []
 hidecommandlog: false
+ignorewhitespaceindiffview: false
