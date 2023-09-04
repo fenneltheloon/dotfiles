@@ -101,11 +101,6 @@ local plugins = {
             -- refer to the configuration section below
         },
     },
-    {
-        'kaarmu/typst.vim',
-        ft = "typst",
-        lazy = false,
-    },
 }
 
 require("lazy").setup(plugins)
@@ -135,6 +130,13 @@ lsp.on_attach(function(client, bufnr)
   -- to learn the available actions
   lsp.default_keymaps({buffer = bufnr})
 end)
+
+require'lspconfig'.typst_lsp.setup{
+	settings = {
+		exportPdf = "onSave" -- Choose onType, onSave or never.
+        -- serverPath = "" -- Normally, there is no need to uncomment it.
+	}
+}
 
 lsp.setup()
 -------------------------------------------------------------------------------
