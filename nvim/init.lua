@@ -131,22 +131,23 @@ vim.keymap.set("n", "-", require("oil").open,
 
 -- Set up lsp-zero. -----------------------------------------------------------
 
-local lsp = require('lsp-zero')
+local lsp_zero = require('lsp-zero')
 
-lsp.on_attach(function(client, bufnr)
+lsp_zero.on_attach(function(client, bufnr)
   -- see :help lsp-zero-keybindings
   -- to learn the available actions
-  lsp.default_keymaps({buffer = bufnr})
+  lsp_zero.default_keymaps({buffer = bufnr})
 end)
 
+require('mason').setup({})
 require('mason-lspconfig').setup({
   ensure_installed = {},
   handlers = {
-    lsp.default_setup,
+    lsp_zero.default_setup,
   },
 })
 
-lsp.setup()
+lsp_zero.setup()
 
 require('lspconfig').typst_lsp.setup({
     settings = {
@@ -154,10 +155,25 @@ require('lspconfig').typst_lsp.setup({
         -- serverPath = "" -- Normally, there is no need to uncomment.
     }
 })
-require('lspconfig').lua_ls.setup({})
-require('lspconfig').rust_analyzer.setup({})
-require('lspconfig').ltex.setup({})
-require('lspconfig').pylsp.setup({})
+
+lsp_zero.setup_servers({'lua_ls', 'rust_analyzer', 'ltex', 'pylsp'})
+
+local cmp = require('cmp')
+
+cmp.setup({
+  sources = {
+    {name = 'nvim_lsp'}
+  },
+  mapping = cmp.mapping.preset.insert({
+    ['<C-Space>'] = cmp.mapping.complete(),
+  }),
+  snippet = {
+    expand = function(args)
+      require('luasnip').lsp_expand(args.body)
+    end,
+  },
+})
+
 -------------------------------------------------------------------------------
 
 -- The all important colorscheme
