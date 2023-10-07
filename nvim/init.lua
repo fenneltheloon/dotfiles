@@ -21,6 +21,8 @@ vim.g.mapleader = " "
 
 vim.opt.completeopt = {"menu", "menuone", "noselect"}
 
+vim.filetype.add({ extension = {typ = "typst"}})
+
 -- bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -101,10 +103,15 @@ local plugins = {
             -- refer to the configuration section below
         },
     },
+    {
+        'kaarmu/typst.vim',
+        ft = 'typst',
+        lazy=false,
+    },
 }
 
 require("lazy").setup(plugins)
-require("mason").setup()
+require("mason").setup({})
 require("catppuccin").setup({
     flavor = "mocha",
     transparent_background = true,
@@ -120,10 +127,11 @@ require("trouble").setup()
 require("oil").setup()
 
 vim.keymap.set("n", "-", require("oil").open,
-{ desc = "Open parent directory" })
+{desc = "Open parent directory" })
 
 -- Set up lsp-zero. -----------------------------------------------------------
-local lsp = require('lsp-zero').preset({})
+
+local lsp = require('lsp-zero')
 
 lsp.on_attach(function(client, bufnr)
   -- see :help lsp-zero-keybindings
@@ -131,14 +139,25 @@ lsp.on_attach(function(client, bufnr)
   lsp.default_keymaps({buffer = bufnr})
 end)
 
-require'lspconfig'.typst_lsp.setup{
-	settings = {
-		exportPdf = "onSave" -- Choose onType, onSave or never.
-        -- serverPath = "" -- Normally, there is no need to uncomment it.
-	}
-}
+require('mason-lspconfig').setup({
+  ensure_installed = {},
+  handlers = {
+    lsp.default_setup,
+  },
+})
 
 lsp.setup()
+
+require('lspconfig').typst_lsp.setup({
+    settings = {
+        exportPdf = "onSave" -- Choose onType, onSave, or never.
+        -- serverPath = "" -- Normally, there is no need to uncomment.
+    }
+})
+require('lspconfig').lua_ls.setup({})
+require('lspconfig').rust_analyzer.setup({})
+require('lspconfig').ltex.setup({})
+require('lspconfig').pylsp.setup({})
 -------------------------------------------------------------------------------
 
 -- The all important colorscheme
