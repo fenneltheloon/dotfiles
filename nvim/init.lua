@@ -65,7 +65,11 @@ local plugins = {
             {'L3MON4D3/LuaSnip'},     -- Required
         }
     },
-    "m4xshen/autoclose.nvim",
+    {
+        'windwp/nvim-autopairs',
+        event = "InsertEnter",
+        opts = {} -- this is equalent to setup({}) function
+    },
     "nvim-lualine/lualine.nvim",
     {
         "iamcco/markdown-preview.nvim",
@@ -118,7 +122,6 @@ require("catppuccin").setup({
     show_end_of_buffer = false,
     term_colors = true,
 })
-require("autoclose").setup()
 require("lualine").setup()
 require("barbar").setup()
 require("trouble").setup()
@@ -156,16 +159,33 @@ require('lspconfig').typst_lsp.setup({
     }
 })
 
-lsp_zero.setup_servers({'lua_ls', 'rust_analyzer', 'ltex', 'pylsp'})
+require('lspconfig').ltex.setup({
+    settings = {
+        ltex ={
+            filetypes = { "bib", "gitcommit", "markdown", "org", "plaintex",
+            "rst", "rnoweb", "tex", "pandoc", "quarto", "rmd", "typst" },
+        },
+    },
+})
 
+lsp_zero.setup_servers({'lua_ls', 'rust_analyzer', 'pylsp'})
+
+local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 local cmp = require('cmp')
-
+cmp.event:on(
+  'confirm_done',
+  cmp_autopairs.on_confirm_done()
+)
 cmp.setup({
   sources = {
     {name = 'nvim_lsp'}
   },
   mapping = cmp.mapping.preset.insert({
-    ['<C-Space>'] = cmp.mapping.complete(),
+      ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+      ['<C-f>'] = cmp.mapping.scroll_docs(4),
+      ['<C-Space>'] = cmp.mapping.complete(),
+      ['<C-e>'] = cmp.mapping.abort(),
+      ['<CR>'] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
   }),
   snippet = {
     expand = function(args)
