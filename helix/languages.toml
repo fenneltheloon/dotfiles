@@ -1,0 +1,27 @@
+[[language]]
+name = "typst"
+scope = "source.typst"
+injection-regex = "^typ(st)?$"
+file-types = ["typ"]
+comment-token = "//"
+indent = { tab-width = 2, unit = "  " }
+roots = ["typst.toml"]
+language-servers = [
+  { name = "typst-lsp" }
+]
+grammar = "typst"
+
+[language.auto-pairs]
+'(' = ')'
+'{' = '}'
+'[' = ']'
+'"' = '"'
+'`' = '`'
+'$' = '$'
+
+[[grammar]]
+name = "typst"
+source = { path = "/home/captainbanaynays/.config/helix/tree-sitter-typst" }
+
+[language-server.typst-lsp]
+command = "typst-lsp"

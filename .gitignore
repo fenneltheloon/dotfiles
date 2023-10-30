@@ -40,3 +40,6 @@ MuseScore
 audacity
 doom
 nvim/lazy-lock.json
+helix/tree-sitter-typst
+helix/runtime
+thorium

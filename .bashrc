@@ -30,6 +30,7 @@ antec3="emeltzer@antec3.panet.utoledo.edu"
 
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export MANROFFOPT="-c"
+export PATH="$PATH:/home/captainbanaynays/.local/share/nvim/mason/bin"
 
 eval "$(starship init bash)"
 eval "$(zoxide init bash)"
