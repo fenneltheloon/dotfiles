@@ -43,3 +43,4 @@ nvim/lazy-lock.json
 helix/tree-sitter-typst
 helix/runtime
 thorium
+menus/applications-merged
